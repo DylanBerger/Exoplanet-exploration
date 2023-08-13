@@ -61,3 +61,45 @@ As you can see I only normalized the orbital period, mass, and density. I starte
 # Clustering 
 
 I used the kmeans algorithm to perform clustering. Now there are four categories of planets but I found that the model had a very hard time discovering terrestrial planets and it actually messed with clustering in the other categories, so I decided to go with three classes: rocky planets (Super Earth and Terrestrial), Neptune-like planets, and Gas Giants. The model clustered very well with three categories as you can see: 
+
+![image](https://github.com/DylanBerger/Exoplanet-exploration/assets/82914031/c9eee9d0-1f24-4711-aa49-aa33e519559c)
+
+The clustering is cool and all, but it wasn't enough to determine how accurate the model clustered without labels.
+
+Luckily I have a dataset with planet names and classes!
+
+# Evaluation 
+
+I first printed the number of planets in each cluster, here are the results: 
+
+![image](https://github.com/DylanBerger/Exoplanet-exploration/assets/82914031/12162f25-5a35-449e-a874-3c3de1ca2f43)
+
+This was the first good sign because the counts of each category were similar to the actual counts of each category (with the number of Super Earth and Terrestrial planets merged into one). The actual counts are as follows: 1733 Gas Giant, 1859 Terrestrial and Super Earth, 1881 Neptune-like. 
+
+Next step is to actually calculate the accuracy, which took several steps.
+
+- First I added the class corresponding to each planet name
+- 
+![image](https://github.com/DylanBerger/Exoplanet-exploration/assets/82914031/dc827d1f-668a-4abc-b1c5-8dc344d7e83d)
+
+- Then I encoded the classes 
+
+![image](https://github.com/DylanBerger/Exoplanet-exploration/assets/82914031/a025113e-aac2-4c6e-979d-97f87cd1b7c2)
+
+- Then matched the clustering labels with the encoded classes (I needed to make a dictionary to do so)
+
+![image](https://github.com/DylanBerger/Exoplanet-exploration/assets/82914031/045d516b-c083-4753-b84c-18e0b0114549)
+
+- Then finally, calculating the percentage of encoded labels that matched the actual labels (first I had to convert data types)
+
+![image](https://github.com/DylanBerger/Exoplanet-exploration/assets/82914031/d94283e2-2569-40ae-92fb-c75f4dc352d3)
+
+The accuracy was 82.4% which was surprising!
+
+From my own analysis, the ones it mainly classified wrong were the smaller neptune-like planets, and the larger super earths which makes sense.
+
+# Next Steps
+
+The model did very well without labels. One thing I would try in the future is to do multiple clusterings. I tried clustering with two categories in a previous iteration of the project, and it seperated the gas giants and everything else almost perfectly. I then tried to apply clustering on the cluster with everything else and then merge them, but it didn't work. It is something I would like to revisit someday. I also would do more indepth data exploration.
+
+Regardless, I consider the project a success, hope you enjoyed!
