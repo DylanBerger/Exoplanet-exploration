@@ -40,4 +40,24 @@ Lastly, we have radius and mass:
 
 ![image](https://github.com/DylanBerger/Exoplanet-exploration/assets/82914031/717dae81-6520-4020-8cd5-6d01dd565b87)
 
+There is not that much to be said, planets with a larger mass have a higher radius. There are some interesting outliers but that's it.
 
+# Data Preprocessing
+
+After exploring the data, it is necessary to process it. 
+
+I applied normalization and selected my features (density, mass, and orbital period)
+
+![image](https://github.com/DylanBerger/Exoplanet-exploration/assets/82914031/22ddf185-1cf1-4288-b7db-801cedd28f1b)
+
+I then shuffled the dataset and applied UMAP (Uniform Manifold Approximation and Projection) to reduce the dimensions of my data from three to two (I originally had more features which made this more necessary, but I eliminated features for reasons I will explain, and the model still worked best after applying UMAP so I kept it). 
+
+![image](https://github.com/DylanBerger/Exoplanet-exploration/assets/82914031/2354a26e-6ff8-4c80-a4f7-983119d46c96)
+
+# Feature Selection
+
+As you can see I only normalized the orbital period, mass, and density. I started originally with six features (planet radius, star mass, orbital period, semi-major axis, planet mass, and planet density), but it didn't exactly work out. I ran clustering with so many combinations, but it worked best on mass, density, and orbital period. So naturally I kept them.
+
+# Clustering 
+
+I used the kmeans algorithm to perform clustering. Now there are four categories of planets but I found that the model had a very hard time discovering terrestrial planets and it actually messed with clustering in the other categories, so I decided to go with three classes: rocky planets (Super Earth and Terrestrial), Neptune-like planets, and Gas Giants. The model clustered very well with three categories as you can see: 
